@@ -76,9 +76,10 @@ List<User> userList = new ArrayList<User>();
 	}
 //prepared statement for creating a user
 	@Override
-	public void createUser(User u) throws SQLException {
+	public void createUser(User u)  {
+		try {
 		Connection con = conUtil.getConnection();
-		String sql = "INSERT INTO users(first_name, last_name, email, username"
+		String sql = "INSERT INTO users(first_name, last_name, email, username,"
 				+ "phone_number, password) values"
 				+ "(?,?,?,?,?,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -92,6 +93,9 @@ List<User> userList = new ArrayList<User>();
 		
 		ps.execute();
 		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	@Override

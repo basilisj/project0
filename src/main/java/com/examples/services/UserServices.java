@@ -25,7 +25,7 @@ public class UserServices {
 		
 		try {
 			uDao.createUser(u);
-			Logging.logger.info("New user has registered");
+			Logging.logger.info("New user " + first + " "+ last + " has registered");
 		} catch (SQLException e) {
 			Logging.logger.warn("Username created that already exists in the database");
 			throw new UserNameIsTakenException();			

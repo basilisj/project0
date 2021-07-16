@@ -10,7 +10,7 @@ public class BankAppDriver {
 		UserDao uDao = new UserDaoDB();
 		UserServices uServ = new UserServices(uDao);
 		
-		uServ.signUp("Bob", "Green", "bobg@mymail.com", "213456789", "please");
+		uServ.signUp("John", "Doe", "jdoe@farmmail.com", "8997999998", "pass");
 
 	}
 

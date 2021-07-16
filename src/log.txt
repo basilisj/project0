@@ -11,3 +11,10 @@
 2021-07-15 23:53:35 WARN  Logging:30 - Username created that already exists in the database
 2021-07-16 00:01:50 WARN  Logging:30 - Username created that already exists in the database
 2021-07-16 00:02:06 WARN  Logging:30 - Username created that already exists in the database
+2021-07-16 09:45:51 INFO  Logging:28 - New user has registered
+2021-07-16 13:03:29 INFO  Logging:28 - New user has registered
+2021-07-16 13:05:36 INFO  Logging:28 - New user has registered
+2021-07-16 13:12:42 INFO  Logging:28 - New user User [id=0, firstName=Jay, lastName=Gordon, email=jgordon@mail.com, username=GordonJay7009, phoneNumber=9999999999, password=pass, accounts=[]]has registered
+2021-07-16 13:15:26 INFO  Logging:28 - New user User [id=0, firstName=Jay, lastName=donovan, email=jdonovan@mail.com, username=donovanJay6359, phoneNumber=9999999998, password=pass, accounts=[]]has registered
+2021-07-16 13:16:46 INFO  Logging:28 - New user User [id=0, firstName=Jake, lastName=State, email=jstate@farmmail.com, username=StateJake1788, phoneNumber=8999999998, password=pass, accounts=[]]has registered
+2021-07-16 13:18:45 INFO  Logging:28 - New user JohnDoehas registered
