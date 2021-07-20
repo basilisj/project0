@@ -28,7 +28,7 @@ List<User> userList = new ArrayList<User>();
 			
 			//We need to create a statement with this sql string
 			PreparedStatement ps = con.prepareStatement(sql);
-			ResultSet rs = ps.executeQuery(sql);//getting info from database
+			ResultSet rs = ps.executeQuery();//getting info from database
 			
 			while(rs.next()) {
 				userList.add(new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(5), 
@@ -54,7 +54,7 @@ List<User> userList = new ArrayList<User>();
 				String sql = "SELECT * FROM users WHERE users.username = '" + username + "'";
 				
 				PreparedStatement ps = con.prepareStatement(sql);
-				ResultSet rs = ps.executeQuery(sql);
+				ResultSet rs = ps.executeQuery();
 				
 				while(rs.next()) {
 					user.setId(rs.getInt(1));

@@ -35,6 +35,20 @@ public class UserServices {
 		return u;
 	}
 	
+	public User signIn(String username, String password) throws UserDoesNotExistException, InvalidCredentialsException{
+		User u = uDao.getUserByUsername(username);
+		if(u.getId()==0) {
+			Logging.logger.warn("Username does not exists.");
+			throw new UserDoesNotExistException();
+		}else if(!u.getPassword().equals(password)) {
+			Logging.logger.warn("Username inputed invalid credentials.");
+			throw new InvalidCredentialsException();
+		}else {
+			Logging.logger.info("Username was logged in.");
+			return u;
+		}
+	}
+	
 	
 	
 	
