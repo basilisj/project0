@@ -18,12 +18,13 @@ public interface AccountDao {
 	
 	void deleteAccount(Account a);
 	
-	void makeWithdrawal(User u, int withdrawal) throws SQLException;
+	void makeWithdrawal(User u, int withdrawal);// throws SQLException;
 
 	public void deposit(User u, int deposit);
 	
 	public void checkBalance();
 
+	void transfer();
 	//Account makeWithdrawal(User u, int deopsit) throws SQLException;
 
 	

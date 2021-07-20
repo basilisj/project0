@@ -24,7 +24,7 @@ public class BankAppDriver {
 	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		
+		AccountDaoDB accountDaoDB = new AccountDaoDB();
 		
 		
 		//uServ.signUp("John", "Doe", "jdoe@farmmail.com", "8997999998", "pass");
@@ -34,7 +34,7 @@ boolean done = false;
 		Account a = null;
 		while(!done) {
 			if(u == null) {
-				System.out.println("Login or Signup? Press 1 to Login, Press 2 to Signup");
+				System.out.println("Welcome to YourBank!!!\n\n" +"Login or Signup?\n\n" +"Press 1 to Login\n" +"Press 2 to Signup");
 				int choice = Integer.parseInt(scan.nextLine());
 				if(choice == 1) {
 					System.out.print("Please enter your username: ");
@@ -110,8 +110,8 @@ boolean done = false;
 					String password = scan.nextLine();
 					try {
 						u = uServ.signUp(first, last, email, phone, password);
-						System.out.println("You may now log in with the username: " + u.getUsername());
-						System.out.println(u.getId());
+						System.out.println("You may now log in with the username: " + u.getUsername()+"\n Please go back to the login page.");
+						
 						break;
 					} catch (Exception e) {
 						System.out.println("Sorry, we could not process your request");
@@ -120,12 +120,12 @@ boolean done = false;
 					}
 				}
 			} else {
-				System.out.println("What would you like to do?\n");
-				System.out.println("1. View account balance./n"
-						+ "2. Create account./n"
-						+ "3. Deposit/n"
-						+ "4. Withdraw/n"
-						+ "5. Transfer/n"
+				System.out.println("What would you like to do?\n\n");
+				System.out.println("1. View account balance.\n"
+						+ "2. Create a bank account.\n"
+						+ "3. Deposit\n"
+						+ "4. Withdral\n"
+						+ "5. Transfer\n"
 						+ "6. Exit.");
 				int choice = Integer.parseInt(scan.nextLine());
 				switch(choice) {
@@ -133,36 +133,49 @@ boolean done = false;
 					System.out.println("Your current balance is:  $" + aDao.getAccountByUser(u).getBalance());
 					
 				
-				System.out.println("Are you finished? Press 1 for yes, press 2 for no.");
+				System.out.println("Are you finished?\n\n" +"Press 1 for yes, press 2 for no.");
 				choice = Integer.parseInt(scan.nextLine());
 				done = (choice == 1)? true : false;
 				
 					
 					break;
 				case 2:
-				System.out.println("Create account:");
+					System.out.println("To create a bank account you need an initial balance and a type of account (checkings/savings)\n");
+				System.out.println("Please insert you initial deopsit amount: ");
 				int balance = Integer.parseInt(scan.nextLine());
+				System.out.println("Please specify what type of account you want: ");
 				String accountType = scan.nextLine();
 				aServ.createAccount(u.getId(), balance, accountType);
-				System.out.println("Are you finished? Press 1 for yes, press 2 for no.");
+				System.out.println("Are you finished?\n\n Press 1 for yes, press 2 for no.");
 				choice = Integer.parseInt(scan.nextLine());
 				done = (choice == 1)? true : false;
 				break;
 				case 3:
 					int amount;
-					System.out.println("Amount to deposit");
-					amount=Integer.parseInt(scan.nextLine());
+					System.out.print("Amount to deposit: ");
+					amount=Integer.parseInt(scan.next());
 					aDao.deposit(u, amount);
-					System.out.println("your balance " +aDao.getAccountByUser(u).getBalance());
+					System.out.print("Your balance is $: " +aDao.getAccountByUser(u).getBalance());
+					break;
+				case 4:
+					
+					System.out.print("Amount to withdrawal: ");
+					amount=Integer.parseInt(scan.next());
+					aDao.makeWithdrawal(u, amount);// throws SQLExcept;
+					System.out.println("Your balance is $: " +aDao.getAccountByUser(u).getBalance());
+					break;
+				case 5:
+					accountDaoDB.transfer();
 					break;
 			}
 				
 			
 		}
 
-		System.out.println("Goodbye :)");
+		
 	
 		}	
+		System.out.println("Goodbye :)");
 	}
 }
 

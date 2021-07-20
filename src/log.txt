@@ -149,3 +149,26 @@
 2021-07-20 00:28:54 INFO  Logging:47 - Username was logged in.
 2021-07-20 00:32:49 INFO  Logging:47 - Username was logged in.
 2021-07-20 00:39:39 INFO  Logging:47 - Username was logged in.
+2021-07-20 00:48:18 INFO  Logging:47 - Username was logged in.
+2021-07-20 00:50:05 INFO  Logging:47 - Username was logged in.
+2021-07-20 00:54:29 INFO  Logging:47 - Username was logged in.
+2021-07-20 10:29:12 INFO  Logging:47 - Username was logged in.
+2021-07-20 10:40:19 INFO  Logging:47 - Username was logged in.
+2021-07-20 10:44:06 INFO  Logging:47 - Username was logged in.
+2021-07-20 10:45:01 INFO  Logging:47 - Username was logged in.
+2021-07-20 10:53:25 INFO  Logging:47 - Username was logged in.
+2021-07-20 10:57:48 INFO  Logging:47 - Username was logged in.
+2021-07-20 11:01:21 INFO  Logging:47 - Username was logged in.
+2021-07-20 11:08:54 INFO  Logging:47 - Username was logged in.
+2021-07-20 11:12:25 INFO  Logging:47 - Username was logged in.
+2021-07-20 11:14:19 INFO  Logging:47 - Username was logged in.
+2021-07-20 11:16:02 INFO  Logging:47 - Username was logged in.
+2021-07-20 12:14:43 WARN  Logging:41 - Username does not exists.
+2021-07-20 12:19:21 INFO  Logging:28 - New user Josue Basilis has registered
+2021-07-20 12:21:03 INFO  Logging:47 - Username was logged in.
+2021-07-20 12:23:38 INFO  Logging:47 - Username was logged in.
+2021-07-20 12:24:03 INFO  Logging:26 - User created a new account.
+2021-07-20 12:26:42 INFO  Logging:47 - Username was logged in.
+2021-07-20 12:26:50 INFO  Logging:26 - User created a new account.
+2021-07-20 12:28:31 INFO  Logging:47 - Username was logged in.
+2021-07-20 12:28:41 INFO  Logging:26 - User created a new account.
