@@ -120,13 +120,13 @@ boolean done = false;
 					}
 				}
 			} else {
-				System.out.println("What would you like to do?\n\n");
+				System.out.println("What would you like to do?\n");
 				System.out.println("1. View account balance.\n"
 						+ "2. Create a bank account.\n"
 						+ "3. Deposit\n"
 						+ "4. Withdral\n"
 						+ "5. Transfer\n"
-						+ "6. Exit.");
+						+ "6. Log out");
 				int choice = Integer.parseInt(scan.nextLine());
 				switch(choice) {
 				case 1:
@@ -167,6 +167,12 @@ boolean done = false;
 				case 5:
 					accountDaoDB.transfer();
 					break;
+				case 6:
+					done = true;
+					break;
+					default:
+						System.out.println("Incorrect input, please try again.");
+						break;
 			}
 				
 			

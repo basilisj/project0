@@ -13,7 +13,7 @@ public interface AccountDao {
 	//public List<Account> getAllAccounts(User u);
 	
 	Account getAccountByUser(User u);
-	
+	//Account a
 	void createAccount(Account a, User u) throws SQLException;
 	
 	void deleteAccount(Account a);

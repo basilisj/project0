@@ -230,6 +230,14 @@ public Scanner scan = new Scanner(System.in);
                             pt.setInt(1, money);
                             pt.setInt(2, toAcc_num);
                             pt.executeUpdate();
+                            String sql5 = "INSERT INTO transactions(acc_number, transaction_type, transaction_amount)values (?,?,?) ";
+                            PreparedStatement pts = con.prepareStatement(sql5);
+                            pts.setInt(1, acc_num);
+                            pts.setString(2, "Transfer");
+                            pts.setInt(3, money);
+                            pts.execute();
+                            
+                            
                             Logging.logger.info("Successful transfer ");
                             System.out.println("The transfer is successful!");
                         } else {
