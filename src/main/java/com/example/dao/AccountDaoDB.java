@@ -303,7 +303,7 @@ public Scanner scan = new Scanner(System.in);
 				if(result > 0) {
 					System.out.println("The deposit of $"+money+" was successful");
 				}else {
-					System.out.println("Amount needs to be greater than 0.");
+					System.out.println("Not a valid account number.");
 				}
 				
 			}
@@ -312,6 +312,8 @@ public Scanner scan = new Scanner(System.in);
 		
 	}
 		
+	}else {
+		System.out.println("Amount needs to be greater than 0.");
 	}
 
 		
@@ -359,6 +361,8 @@ public Scanner scan = new Scanner(System.in);
 	                            pts.executeQuery();
 	                            
 		
+	                    }else {
+	                    	System.out.println("Not a valid entry to withdraw this amount.");
 	                    }
 	                }
 			/*String sql = "UPDATE account set acc_balance = acc_balance -? WHERE acc_number=?";

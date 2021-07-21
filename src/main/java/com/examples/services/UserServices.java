@@ -44,7 +44,7 @@ public class UserServices {
 			Logging.logger.warn("Username inputed invalid credentials.");
 			throw new InvalidCredentialsException();
 		}else {
-			Logging.logger.info("Username was logged in.");
+			Logging.logger.info("User was logged in.");
 			return u;
 		}
 	}

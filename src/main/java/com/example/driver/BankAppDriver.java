@@ -8,6 +8,7 @@ import com.example.dao.AccountDaoDB;
 import com.example.dao.UserDao;
 import com.example.dao.UserDaoDB;
 import com.example.exceptions.WithdrawalNegativeBalanceException;
+import com.example.logging.Logging;
 import com.example.models.User;
 import com.examples.services.AccountServices;
 import com.examples.services.UserServices;
@@ -20,8 +21,7 @@ public class BankAppDriver {
 	private static AccountDao aDao = new AccountDaoDB();
 	private static UserServices uServ = new UserServices(uDao);
 	private static AccountServices aServ = new AccountServices(aDao);
-	//private static Account a = new Account();
-	//private static User u;
+	
 	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
@@ -32,7 +32,7 @@ public class BankAppDriver {
 boolean done = false;
 		
 		User u = null;
-		//Account a = null;
+		
 		while(!done) {
 			if(u == null) {
 				System.out.println("Welcome to YourBank!!!\n\n" +"Login or Signup?\n\n" +"Press 1 to Login\n" +"Press 2 to Signup");
@@ -131,7 +131,7 @@ boolean done = false;
 				int choice = Integer.parseInt(scan.nextLine());
 				switch(choice) {
 				case 1:
-					accountDaoDB.balance();
+					aDao.balance();
 										
 					break;
 				case 2:
@@ -146,18 +146,19 @@ boolean done = false;
 				done = (choice == 1)? true : false;
 				break;
 				case 3:
-					accountDaoDB.deposit();
+					aDao.deposit();
 					
 					break;
 				case 4:
-					accountDaoDB.withdraw();
+					aDao.withdraw();
 					
 					break;
 				case 5:
-					accountDaoDB.transfer();
+					aDao.transfer();
 					break;
 				case 6:
 					done = true;
+					Logging.logger.info("User has signed out");
 					break;
 				case 7:
 					
@@ -173,8 +174,6 @@ boolean done = false;
 				
 			
 		}
-
-		
 	
 		}	
 		scan.close();
@@ -182,88 +181,3 @@ boolean done = false;
 	}
 }
 
-/*
-System.out.println("To view posts press 1, to create a post press 2");
-int choice = Integer.parseInt(in.nextLine());
-//If the user chooses 1, we will show them the list of posts
-if(choice == 1) {
-	List<PostDisplay> posts = pServ.getAllPosts();
-	for(PostDisplay post: posts) {
-		System.out.println(post.getUsername() + ":");
-		System.out.println(post.getContent());
-		System.out.println();
-	}
-	System.out.println("Are you finished? Press 1 for yes, press 2 for no");
-	choice = Integer.parseInt(in.nextLine());
-	done = (choice == 1) ? true : false;
-} else {
-	System.out.println("Please enter your content below:");
-	String content = in.nextLine();
-	pServ.addPost(u.getId(), u.getId(), content);
-	System.out.println("Post was received, are you finished? Press 1 for yes, press 2 for no");
-	choice = Integer.parseInt(in.nextLine());
-	done = (choice == 1) ? true : false;
-}System.out.println("What would you like to do?");
-						char option = '\0';
-						System.out.println("A. Check balance.");
-						System.out.println("B. Deposit");
-						System.out.println("C. Withdraw");
-						System.out.println("D. Transfer funds");
-						System.out.println("E. Exit");
-						
-						do
-						{
-							option = scan.next().charAt(0);
-						
-						switch(option) {
-						case 'A':
-							System.out.println("Balance = "+ balance);
-						
-						}
-do {
-	System.out.println("What would you like to do?");
-	choice = scan.nextInt();
-	System.out.println("1. Check balance.");
-	System.out.println("2. Deposit");
-	System.out.println("3. Withdraw");
-	System.out.println("4. Transfer funds");
-	System.out.println("5. Exit");
-	
-	switch(choice) {
-	case 1:
-		System.out.println("Balance = "+ a.getBalance());
-		break;
-	case 2:
-		int amount;
-		System.out.println("Amount to deposit: ");
-		amount = scan.nextInt();
-		if (amount <=0)
-			System.out.println("Can't deposit a negative amount.");
-		else {
-			//balance += amount;
-			System.out.println( a.getBalance() + amount + "has been deposited");
-		}
-		break;
-	case 3:
-		System.out.println("Amount to withdraw: ");
-		amount = scan.nextInt();
-		if (amount <= 0 || amount> balance)
-			System.out.println("Withdrawal can't be processed.");
-		else {
-			balance -=amount;
-			System.out.println("$" + amount + "has been withdrawn.");
-		}
-		break;
-	case 4:
-		break;
-	case 5:
-		done = true;
-		break;
-		default:
-			System.out.println("Wrong choice.");
-	
-	}
-	
-		
-	}while(!done);
-*/
