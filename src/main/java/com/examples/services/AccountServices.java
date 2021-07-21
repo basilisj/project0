@@ -7,6 +7,7 @@ import com.example.dao.AccountDao;
 import com.example.exceptions.UserNameIsTakenException;
 import com.example.logging.Logging;
 import com.example.models.Account;
+import com.example.models.TransactionDisplay;
 import com.example.models.User;
 
 public class AccountServices {
@@ -31,7 +32,9 @@ public class AccountServices {
 		}
 		return a;
 	}
-	
+	public List<TransactionDisplay> getAllTransaction(){
+		return aDao.getAllTransactions();
+	}
 	//public Account withdraw(int amount) {
 	//	Account a = aDao.makeWithdrawal(a);
 		//try {

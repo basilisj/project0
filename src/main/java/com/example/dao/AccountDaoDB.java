@@ -5,12 +5,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import com.example.logging.Logging;
 import com.example.models.Account;
+import com.example.models.TransactionDisplay;
 import com.example.models.User;
 import com.example.utils.ConnectionUtil;
 
@@ -112,7 +114,7 @@ public Scanner scan = new Scanner(System.in);
 
 
 
-	
+	/*
 	@Override
 	public void makeWithdrawal(User u, int withdrawal) { //throws SQLException {
 		Account a = getAccountByUser(u);
@@ -193,7 +195,7 @@ public Scanner scan = new Scanner(System.in);
 	            System.out.println("Sorry Input error ");
 	        }
 
-	    }
+	    }*/
 
 
 
@@ -245,7 +247,7 @@ public Scanner scan = new Scanner(System.in);
                             System.out.println("The receiving account number does not exist!");
                         }
                     } else {
-                        System.out.println("The card balance is insufficient!");
+                        System.out.println("The account balance is insufficient!");
                     }
                 } else {
                     System.out.println("The account number is wrong!");
@@ -273,9 +275,180 @@ public Scanner scan = new Scanner(System.in);
 		
 	}
 
+
+
+	@Override
+	public void deposit() {
+		System.out.print("Please enter your account number.");
+		int acc_num = scan.nextInt();
+		System.out.println("Please enter amount of your deposit.");
+		int money = scan.nextInt();
+		if(money > 0) {
+			String sql = "UPDATE account set acc_balance = acc_balance +? WHERE acc_number=?";
+			Connection con = conUtil.getConnection();
+			try {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, money);
+				ps.setInt(2, acc_num);
+				int result = ps.executeUpdate();
+				String sql5 = "INSERT INTO transactions(acc_number, transaction_type, transaction_amount)values (?,?,?) ";
+                PreparedStatement pts = con.prepareStatement(sql5);
+                pts.setInt(1, acc_num);
+                pts.setString(2, "Deposit");
+                pts.setInt(3, money);
+                pts.execute();
+                
+                
+                Logging.logger.info("Successful deposit ");
+				if(result > 0) {
+					System.out.println("The deposit of $"+money+" was successful");
+				}else {
+					System.out.println("Amount needs to be greater than 0.");
+				}
+				
+			}
+				
+	catch (Exception DepositOrWithdrawalNegativeException) {
+		
+	}
+		
+	}
+
 		
 	
 	
 	
 
 }
+
+
+
+	@Override
+	public void withdraw() {
+		
+		System.out.print("Please enter your account number.");
+		int acc_num = scan.nextInt();
+		//System.out.println("Please enter amount to withdraw?");
+		//int money = scan.nextInt();
+		
+		//if (money > 0) {
+	            String sql1 = "SELECT acc_balance FROM account WHERE acc_number = ?";
+	            Connection con = conUtil.getConnection();
+	            try {
+	                PreparedStatement ps= con.prepareStatement(sql1);
+	                ps.setInt(1, acc_num);
+	                ResultSet rs = ps.executeQuery();
+	                if (rs.next()) {
+	                	System.out.print("Please enter amount to withdraw:");
+                        int amount = scan.nextInt();
+	                    int acc_balance = rs.getInt("acc_balance");
+	                    if ((amount > 0 ) && (amount <= acc_balance)) {
+	                        
+	                        String sql2 = "UPDATE account set acc_balance = acc_balance -? WHERE acc_number=?";
+	                        PreparedStatement s = con.prepareStatement(sql2);
+	                        s.setInt(1, amount);
+	                        s.setInt(2, acc_num);
+	                        int result = s.executeUpdate();
+	                        //rs = s.executeQuery();
+	                   
+	                            String sql = "INSERT INTO transactions(acc_number, transaction_type, transaction_amount)values (?,?,?) ";
+	                            PreparedStatement pts = con.prepareStatement(sql);
+	                            pts.setInt(1, acc_num);
+	                            pts.setString(2, "Withdraw");
+	                            pts.setInt(3, amount);
+	                            pts.executeQuery();
+	                            
+		
+	                    }
+	                }
+			/*String sql = "UPDATE account set acc_balance = acc_balance -? WHERE acc_number=?";
+			Connection con = conUtil.getConnection();
+			try {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, money);
+				ps.setInt(2, acc_num);
+				int result = ps.executeUpdate();
+				String sql5 = "INSERT INTO transactions(acc_number, transaction_type, transaction_amount)values (?,?,?) ";
+                PreparedStatement pts = con.prepareStatement(sql5);
+                pts.setInt(1, acc_num);
+                pts.setString(2, "Withdraw");
+                pts.setInt(3, money);
+                pts.execute();
+                
+                */
+	            
+                Logging.logger.info("Successful withdrawal. ");
+			//	if(amount > 0) {
+			//		System.out.println("The deposit of $"+amount+" was successful");
+			//	}else {
+				//	System.out.println("Amount needs to be greater than 0.");
+				//}
+				
+			}
+				
+	catch (Exception DepositOrWithdrawalNegativeException) {
+		
+	}		
+	}
+
+
+
+	@Override
+	public void balance() {
+		System.out.print("Please enter your account number.");
+		int acc_num = scan.nextInt();
+			String sql = "SELECT acc_balance FROM account WHERE acc_number=?";
+			Connection con = conUtil.getConnection();
+			try {
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setInt(1, acc_num);
+				ResultSet rs = ps.executeQuery();
+				if(rs.next()) {
+					int acc_balance = rs.getInt("acc_balance");
+					System.out.println("The balance in your account is: $"+acc_balance);
+				}else {
+					System.out.println("No account was found.");
+				}
+				
+                
+                
+                Logging.logger.info("User checked balance ");
+				
+	}catch(SQLException e) {
+		e.printStackTrace();
+		
+	}
+		
+	}
+
+
+
+	@Override
+	public List<TransactionDisplay> getAllTransactions() {
+		List<TransactionDisplay> tList = new ArrayList<TransactionDisplay>();
+		
+		try {
+			Connection con = conUtil.getConnection();
+			con.setAutoCommit(false);
+			String sql = "{?=call get_all_transaction()}";
+			CallableStatement cs = con.prepareCall(sql);
+			cs.registerOutParameter(1, Types.OTHER);
+			cs.execute();
+			
+			ResultSet rs = (ResultSet) cs.getObject(1);
+			
+			while(rs.next()) {
+				TransactionDisplay tran = new TransactionDisplay(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4));
+				tList.add(tran);
+			}
+			con.setAutoCommit(true);
+			return tList;
+			}catch(SQLException e) {
+				
+				e.printStackTrace();
+		}
+return null;
+	}
+}
+
+

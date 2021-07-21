@@ -12,6 +12,7 @@ import com.example.models.User;
 import com.examples.services.AccountServices;
 import com.examples.services.UserServices;
 import com.example.models.Account;
+import com.example.models.TransactionDisplay;
 
 public class BankAppDriver {
 
@@ -19,19 +20,19 @@ public class BankAppDriver {
 	private static AccountDao aDao = new AccountDaoDB();
 	private static UserServices uServ = new UserServices(uDao);
 	private static AccountServices aServ = new AccountServices(aDao);
-	private static Account a = new Account();
-	private static User u;
+	//private static Account a = new Account();
+	//private static User u;
 	
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		AccountDaoDB accountDaoDB = new AccountDaoDB();
 		
 		
-		//uServ.signUp("John", "Doe", "jdoe@farmmail.com", "8997999998", "pass");
+	
 boolean done = false;
 		
 		User u = null;
-		Account a = null;
+		//Account a = null;
 		while(!done) {
 			if(u == null) {
 				System.out.println("Welcome to YourBank!!!\n\n" +"Login or Signup?\n\n" +"Press 1 to Login\n" +"Press 2 to Signup");
@@ -124,20 +125,14 @@ boolean done = false;
 				System.out.println("1. View account balance.\n"
 						+ "2. Create a bank account.\n"
 						+ "3. Deposit\n"
-						+ "4. Withdral\n"
+						+ "4. Withdraw\n"
 						+ "5. Transfer\n"
 						+ "6. Log out");
 				int choice = Integer.parseInt(scan.nextLine());
 				switch(choice) {
 				case 1:
-					System.out.println("Your current balance is:  $" + aDao.getAccountByUser(u).getBalance());
-					
-				
-				System.out.println("Are you finished?\n\n" +"Press 1 for yes, press 2 for no.");
-				choice = Integer.parseInt(scan.nextLine());
-				done = (choice == 1)? true : false;
-				
-					
+					accountDaoDB.balance();
+										
 					break;
 				case 2:
 					System.out.println("To create a bank account you need an initial balance and a type of account (checkings/savings)\n");
@@ -151,24 +146,25 @@ boolean done = false;
 				done = (choice == 1)? true : false;
 				break;
 				case 3:
-					int amount;
-					System.out.print("Amount to deposit: ");
-					amount=Integer.parseInt(scan.next());
-					aDao.deposit(u, amount);
-					System.out.print("Your balance is $: " +aDao.getAccountByUser(u).getBalance());
+					accountDaoDB.deposit();
+					
 					break;
 				case 4:
+					accountDaoDB.withdraw();
 					
-					System.out.print("Amount to withdrawal: ");
-					amount=Integer.parseInt(scan.next());
-					aDao.makeWithdrawal(u, amount);// throws SQLExcept;
-					System.out.println("Your balance is $: " +aDao.getAccountByUser(u).getBalance());
 					break;
 				case 5:
 					accountDaoDB.transfer();
 					break;
 				case 6:
 					done = true;
+					break;
+				case 7:
+					
+					List<TransactionDisplay> transa = aServ.getAllTransaction();
+					for(TransactionDisplay tran: transa) {
+						System.out.println(aServ.getAllTransaction());
+					}
 					break;
 					default:
 						System.out.println("Incorrect input, please try again.");
@@ -181,6 +177,7 @@ boolean done = false;
 		
 	
 		}	
+		scan.close();
 		System.out.println("Goodbye :)");
 	}
 }

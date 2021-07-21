@@ -184,3 +184,15 @@
 2021-07-20 20:17:11 INFO  Logging:241 - Successful transfer 
 2021-07-20 20:19:37 INFO  Logging:47 - Username was logged in.
 2021-07-20 20:20:07 INFO  Logging:241 - Successful transfer 
+2021-07-20 22:42:18 INFO  Logging:47 - Username was logged in.
+2021-07-20 23:47:48 INFO  Logging:47 - Username was logged in.
+2021-07-20 23:48:18 INFO  Logging:375 - Successful withdrawal. 
+2021-07-21 00:07:36 INFO  Logging:47 - Username was logged in.
+2021-07-21 00:20:51 INFO  Logging:47 - Username was logged in.
+2021-07-21 00:22:24 INFO  Logging:47 - Username was logged in.
+2021-07-21 00:25:09 INFO  Logging:47 - Username was logged in.
+2021-07-21 00:25:31 INFO  Logging:300 - Successful transfer 
+2021-07-21 00:29:03 INFO  Logging:47 - Username was logged in.
+2021-07-21 00:51:44 INFO  Logging:47 - Username was logged in.
+2021-07-21 00:51:51 INFO  Logging:413 - User checked balance 
+2021-07-21 01:44:10 INFO  Logging:47 - Username was logged in.
